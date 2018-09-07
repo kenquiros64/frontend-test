@@ -1,11 +1,11 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
-      <a class="navbar-brand" href="#">BV Frontend Challenge</a>
-      <div class="float-right">
-        <div *ngIf="isLoggedIn">
-            <button (click)="logOut()" class="btn btn-dark float-right">Sign out</button>
-        </div>
-      </div>
+    <a class="navbar-brand" href="#">BV Frontend Challenge</a>
+    <ul *ngIf="isLoggedIn" class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button (click)="logOut()" class="btn btn-dark">Sign out</button>
+      </li>
+    </ul>
   </nav>
 </header>
 <main class="h-100" role="main">

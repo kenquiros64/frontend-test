@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 
+interface myData {
+  success: boolean,
+  message: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  loggedInStatus = false
+
   constructor() { }
+
+  setLoggedIn(value: boolean){
+    this.loggedInStatus = value;
+  }
+
+  get isLoggedIn(){
+    return this.loggedInStatus
+  }
 
   getUserDetails(email, password){
     var users = JSON.parse(localStorage.getItem('users'));

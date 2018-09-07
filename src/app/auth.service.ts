@@ -12,6 +12,7 @@ interface myData {
 export class AuthService {
 
   loggedInStatus = false
+  currentUser = ""
 
   constructor() { }
 
@@ -19,8 +20,24 @@ export class AuthService {
     this.loggedInStatus = value;
   }
 
+  setCurrentUser(user: string){
+    this.currentUser = user;
+  }
+
   get isLoggedIn(){
     return this.loggedInStatus
+  }
+
+  get getCurrentUser(){
+    console.log(this.currentUser)
+    console.log("/asd")
+    return this.currentUser
+  }
+
+  logOut(){
+    this.loggedInStatus = false
+    this.currentUser = ""
+    console.log("Here")
   }
 
   getUserDetails(email, password){

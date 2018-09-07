@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private router: Router) { }
+  constructor(private App: AppComponent, private Auth: AuthService, private router: Router) { }
 
   errorMessage = ""
   email = ""
@@ -26,6 +27,8 @@ export class LoginComponent implements OnInit {
     if(login === 1){
       this.router.navigate(['admin'])
       this.Auth.setLoggedIn(true)
+      this.Auth.setCurrentUser(this.email)
+      this.App.updateUser()
     }else if(login === 2){
       this.errorMessage = 'User not registered.'
     }else{

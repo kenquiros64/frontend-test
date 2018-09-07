@@ -5,3 +5,12 @@
     <p class="lead">Make your own reports. Start by searching an email.</p>
   </div>
 </div>
+
+<div class="container">
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" aria-label="Search" aria-describedby="button">
+    <div class="input-group-append">
+      <button (click)="getData()" class="btn btn-outline-secondary" type="button" id="button">Search</button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,7 +9,11 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService) { }
+  constructor(private Auth: AuthService, private router: Router) { }
+
+  errorMessage = ""
+  email = ""
+  password = ""
 
   ngOnInit() {
   }
@@ -16,18 +21,17 @@ export class LoginComponent implements OnInit {
   loginUser(event) {
     event.preventDefault()
     const target = event.target
-    const email = target.querySelector('#email').value
-    const password = target.querySelector('#password').value
     
-    var login = this.Auth.getUserDetails(email, password)
+    var login = this.Auth.getUserDetails(this.email, this.password)
     if(login === 1){
-      console.log('YEAH')
+      this.router.navigate(['admin'])
+      this.Auth.setLoggedIn(true)
     }else if(login === 2){
-      console.log('User not registered.')
+      this.errorMessage = 'User not registered.'
     }else{
-      console.log('Your password is incorrect.')
+      this.errorMessage = 'Your password is incorrect.'
     }
-    target.querySelector('#email').value = ''
-    target.querySelector('#password').value = ''
+    this.email = ''
+    this.password = ''
   }
 }

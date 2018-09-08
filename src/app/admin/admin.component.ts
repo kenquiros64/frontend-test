@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   email = ""
 
   getData() {
-    let headers = new HttpHeaders().set('Content-Type', 'x-www-form-urlencoded')
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     var host = 'https://www.beenverified.com/hk/dd/email?email='
     console.log(host.concat(this.email))
     if(this.email !== ""){

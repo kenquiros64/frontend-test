@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -15,11 +15,10 @@ export class AdminComponent implements OnInit {
   email = ""
 
   getData() {
-    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     var host = 'https://www.beenverified.com/hk/dd/email?email='
     console.log(host.concat(this.email))
     if(this.email !== ""){
-      this.http.get(host.concat(this.email), {headers: headers}).subscribe(data => {
+      this.http.get(host.concat(this.email)).subscribe(data => {
         console.log(data);
       });
     }else{

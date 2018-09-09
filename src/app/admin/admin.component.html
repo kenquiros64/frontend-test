@@ -7,10 +7,25 @@
 </div>
 
 <div class="container">
-  <div class="input-group mb-3">
-    <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" aria-label="Search" aria-describedby="button">
-    <div class="input-group-append">
-      <button (click)="getData()" class="btn btn-outline-secondary" type="button" id="button">Search</button>
+  <section>
+    <div class="input-group mb-3">
+      <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" aria-label="Search" aria-describedby="button">
+      <div class="input-group-append">
+        <button (click)="getData()" class="btn btn-outline-secondary" type="button" id="button">Search</button>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <h3>My reports</h3>
+  <div class="dropdown-divider"></div>
+  <section>
+    <div class="card text-dark mb-3 lg-4">
+      <div class="card-header bg-primary text-white">Report information</div>
+      <div class="card-body">
+        <h5 class="card-title">Primary card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary float-right">View details</a>
+      </div>
+    </div>
+  </section>
 </div>

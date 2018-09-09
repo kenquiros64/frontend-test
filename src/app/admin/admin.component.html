@@ -7,24 +7,47 @@
 </div>
 
 <div class="container">
+  <h3>Search by email</h3>
+  <div class="dropdown-divider"></div>
   <section>
-    <div class="input-group mb-3">
-      <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" aria-label="Search" aria-describedby="button">
-      <div class="input-group-append">
-        <button (click)="getData()" class="btn btn-outline-secondary" type="button" id="button">Search</button>
+    <form class="form" [formGroup]="searchForm" (submit)="getData($event)" id="formSearch">
+      <div class="input-group mb-3">
+        <input type="email" 
+                class="form-control form-control-lg rounded-0"
+                name="email" 
+                id="email" 
+                formControlName="email"
+                placeholder="Searh here">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit" id="button">Search</button>
+        </div>
       </div>
-    </div>
+      <div *ngIf="email.errors && isValidFormSubmitted != null && !isValidFormSubmitted"> 
+          <div *ngIf="email.errors.pattern">
+              <p class="text-danger">Email pattern not valid.</p>
+          </div> 
+          <div *ngIf="email.errors.required">
+              <p class="text-danger">Email is required.</p>
+          </div> 
+      </div> 
+  </form>
   </section>
 
   <h3>My reports</h3>
   <div class="dropdown-divider"></div>
   <section>
-    <div class="card text-dark mb-3 lg-4">
-      <div class="card-header bg-primary text-white">Report information</div>
-      <div class="card-body">
-        <h5 class="card-title">Primary card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary float-right">View details</a>
+    <div class="row">
+      <div class="col col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+              <p><img class="rounded-circle" src="assets/card-image.png"></p>
+              <h5 class="card-title"><strong>Mathew Alex</strong></h5>
+              <p class="card-text">Email</p>
+              <p class="card-text">Phone</p>
+              <p class="card-text">Job</p>
+              <a href="#" class="btn btn-primary">Views Details</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

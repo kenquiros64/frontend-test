@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin',
@@ -9,16 +11,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private http: HttpClient) { }
+  constructor(private Auth: AuthService, private http: HttpClient, private formBuilder:FormBuilder) { }
 
   currentUser = ""
-  email = ""
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  host = 'https://www.beenverified.com/hk/dd/email?email='
+  isValidFormSubmitted = null;
 
-  getData() {
-    var host = 'https://www.beenverified.com/hk/dd/email?email='
-    console.log(host.concat(this.email))
-    if(this.email !== ""){
-      this.http.get(host.concat(this.email)).subscribe(data => {
+  faMapMarker = faMapMarker
+
+  searchForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+  });
+
+  getData(event) {
+    event.preventDefault()
+    
+    this.isValidFormSubmitted = false;
+    if (this.searchForm.invalid) {
+       return;
+    }
+    this.isValidFormSubmitted = true;
+    
+    let search = this.searchForm.value;
+
+    if(search.email !== ""){
+      this.http.get(this.host.concat(search.email)).subscribe(data => {
         console.log(data);
       });
     }else{
@@ -28,8 +46,9 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.Auth.getCurrentUser
-
-  
   }
 
+  get email() {
+    return this.searchForm.get('email');
+  }  
 }

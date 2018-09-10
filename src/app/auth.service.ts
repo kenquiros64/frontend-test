@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 
-interface myData {
-  success: boolean,
-  message: string
-}
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +25,6 @@ export class AuthService {
   }
 
   get getCurrentUser(){
-    console.log(this.currentUser)
-    console.log("/asd")
     return this.currentUser
   }
 

@@ -11,7 +11,9 @@ import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { ReportService } from './report.service';
 import { ReportsComponent } from './reports/reports.component';
+import { ReportListComponent } from './report-list/report-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { ReportsComponent } from './reports/reports.component';
     LoginComponent,
     AdminComponent,
     RegisterComponent,
-    ReportsComponent
+    ReportsComponent,
+    ReportListComponent
   ],
   imports: [
     BrowserModule,
@@ -45,10 +48,11 @@ import { ReportsComponent } from './reports/reports.component';
         path: '',
         component: AdminComponent,
         canActivate: [AuthGuard]
-      }
+      },
+      { path: "report/:id", component: ReportsComponent }
     ])
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

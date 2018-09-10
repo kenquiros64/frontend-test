@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { ReportService } from '../report.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
+import * as R from 'ramda';
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +13,7 @@ import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private http: HttpClient, private formBuilder:FormBuilder) { }
+  constructor(private Auth: AuthService, private reportService: ReportService, private http: HttpClient, private formBuilder:FormBuilder) { }
 
   currentUser = ""
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
@@ -37,7 +39,7 @@ export class AdminComponent implements OnInit {
 
     if(search.email !== ""){
       this.http.get(this.host.concat(search.email)).subscribe(data => {
-        console.log(data);
+        this.reportService.addNewReport(search.email, data)
       });
     }else{
       console.log('No data found')

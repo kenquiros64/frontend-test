@@ -1,14 +1,48 @@
-<div class="row">
-    <div class="col col-md-4" *ngFor="let report of reports">
-      <div class="card mb-4">
-        <div class="card-body text-center">
-            <p><img class="rounded-circle" src="assets/card-image.png"></p>
-            <h5 class="card-title"><strong>Mathew Alex</strong></h5>
-            <p class="card-text">Email</p>
-            <p class="card-text">Phone</p>
-            <p class="card-text">Job</p>
-            <a href="#" class="btn btn-primary">Views Details</a>
-        </div>
-      </div>
-    </div>
+<div class="row" style="padding:15px;">
+  <div class="list-group col-md-4 order-md-1" style="flex-grow: 1; overflow-y:auto; max-height: 600px;">
+    <a class="list-group-item list-group-item-action active text-white">
+      Reports
+    </a>
+    <a (click)="updateReport($event)" class="list-group-item list-group-item-action" *ngFor="let email of emails">{{email.email_address}}</a>
   </div>
+  <div class="list-group col-md-8 order-md-2">
+    <h2>Names</h2>
+    <div class="dropdown-divider"></div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let name of userinfo.names">{{name.full}}</li>
+    </ul>
+    <div class="dropdown-divider"></div>
+    <span *ngIf="userinfo.dob !== ''">Birthday: {{userinfo.dob}}</span>
+    <span *ngIf="userinfo.gender !== ''">Gender: {{userinfo.gender}}</span>
+    <h2>Jobs</h2>
+    <div class="dropdown-divider"></div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let job of userinfo.jobs">
+        <div>
+          <h6>{{job.title}}</h6>
+          <small>{{job.company}}</small>
+        </div>
+      </li>
+    </ul>
+    <h2>Emails</h2>
+    <div class="dropdown-divider"></div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let email of userinfo.emails">
+        <div>
+          <h6>{{email.email_address}}</h6>
+          <small>{{email.type}}</small>
+        </div>
+      </li>
+    </ul>
+    <h2>Social</h2>
+    <div class="dropdown-divider"></div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let social of userinfo.social">
+        <div>
+          <h6>{{social.type}}</h6>
+          <small>{{social.url}}</small>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

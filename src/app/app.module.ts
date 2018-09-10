@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -31,7 +30,6 @@ import { ReportListComponent } from './report-list/report-list.component';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    ToastModule.forRoot(),
     RouterModule.forRoot([
       {
         path: 'login',

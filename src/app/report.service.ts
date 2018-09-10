@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';  
+import { BehaviorSubject } from 'rxjs';
 import * as R from 'ramda';
 
 @Injectable({
@@ -8,35 +9,50 @@ export class ReportService {
 
   constructor() { }
 
-  getAllReports(){
+  private reportsSource = new BehaviorSubject(JSON.parse(localStorage.getItem('users')))
+  currentReports = this.reportsSource.asObservable()
+
+
+  getAllReports(user){
     var users = JSON.parse(localStorage.getItem('users'))
+    this.reportsSource = new BehaviorSubject(users)
     return users
   }
 
   getReportByEmail(email){
     var users = JSON.parse(localStorage.getItem('users'))
-    var user = R.find(R.propEq('email', email))(users);
-    if( user !== undefined){
-      //console.log(user)
-    }else{
-      //console.log("Not found")
-    }
   }
 
-  addNewReport(email, newReport){
+  addNewReport(user, email, newReport){
     var users = JSON.parse(localStorage.getItem('users'))
     
     var updateReports = function(x){
-      if(x.email === email){
+      if(x.email === user){
         if(x.reports === undefined){
           x.reports = [newReport]
+          return true
         }else{
-          x.reports.push(newReport)
+          let ingresar = true
+          x.reports.forEach(function(entry) {
+            let emails = R.prop('emails', entry)
+            let find = R.find(R.propEq('email_address', email))(emails)
+            if( find !== undefined){
+              ingresar = false
+            }
+          });
+
+          if( ingresar === true){
+            x.reports.push(newReport)
+            return true
+          }else{ 
+            return false
+          }
         }
       }
     }
 
     R.map(updateReports, users)
+    this.reportsSource.next(users)
     localStorage.setItem('users', JSON.stringify(users))
   }
 }

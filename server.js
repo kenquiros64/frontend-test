@@ -16,6 +16,12 @@ app.use(cors({
   'preflightContinue': false
 }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ next();
+});
+
 // Serve only the static files form the dist directory
 // Replace the '/dist/<to_your_project_name>'
 app.use(express.static(__dirname + '/dist/frontend-test'));

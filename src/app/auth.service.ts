@@ -29,11 +29,12 @@ export class AuthService {
   }
 
   logOut(){
+    
     this.loggedInStatus = false
     this.currentUser = ""
   }
 
-  getUserDetails(email, password){
+  getUserDetails(email, password: string){
     var users = JSON.parse(localStorage.getItem('users'));
 
     if( users === null ){
@@ -41,7 +42,7 @@ export class AuthService {
     } else {
       var user = R.find(R.propEq('email', email))(users);
       if( user !== undefined){
-        if(String(user.password) == String(password)){
+        if(new String(user.password).valueOf === new String(password).valueOf){
           return 1
         }else{
           return 3

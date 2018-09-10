@@ -31,7 +31,6 @@ export class AuthService {
   logOut(){
     this.loggedInStatus = false
     this.currentUser = ""
-    console.log("Here")
   }
 
   getUserDetails(email, password){
@@ -42,7 +41,7 @@ export class AuthService {
     } else {
       var user = R.find(R.propEq('email', email))(users);
       if( user !== undefined){
-        if(user.password === password){
+        if(String(user.password) == String(password)){
           return 1
         }else{
           return 3

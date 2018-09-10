@@ -5,6 +5,7 @@ import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -12,7 +13,11 @@ import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private reportService: ReportService, private http: HttpClient, private formBuilder:FormBuilder) { }
+  constructor(private Auth: AuthService
+              ,private reportService: ReportService
+              ,private http: HttpClient
+              ,private formBuilder:FormBuilder
+            ) { }
 
   currentUser = ""
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
@@ -45,7 +50,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.Auth.getCurrentUser
-    
   }
 
   get email() {

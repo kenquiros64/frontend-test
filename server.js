@@ -13,7 +13,7 @@ app.use(cors({
   'exposedHeaders': ['sessionId'],
   'origin': 'https://secure-fjord-49277.herokuapp.com',
   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
+  'preflightContinue': true
 }));
 
 app.use(function(req, res, next) {

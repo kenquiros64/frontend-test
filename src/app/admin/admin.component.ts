@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ReportService } from '../report.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
-
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
+
 export class AdminComponent implements OnInit {
 
   constructor(private Auth: AuthService
@@ -30,6 +31,10 @@ export class AdminComponent implements OnInit {
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
   });
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  
   getData(event) {
     event.preventDefault()
     
@@ -42,7 +47,7 @@ export class AdminComponent implements OnInit {
     let search = this.searchForm.value;
 
     if(search.email !== ""){
-      this.http.get(this.host.concat(search.email)).subscribe(data => {
+      this.http.get(this.host.concat(search.email), this.httpOptions).subscribe(data => {
         this.reportService.addNewReport(this.currentUser,search.email, data)
       });
     }

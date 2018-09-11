@@ -1,0 +1,8 @@
+{
+    "/*": {
+      "target": "https://secure-fjord-49277.herokuapp.com",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+  }
